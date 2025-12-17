@@ -6,6 +6,8 @@ import sys
 from recon.dns_enum import enumerate_dns
 from recon.whois_lookup import whois_lookup
 from mitre.mapping import map_finding_to_mitre
+from mitre.mapping import techniques
+from recon import get_subdomains
 
 
 def validate_domain(domain: str) -> bool:
@@ -59,6 +61,8 @@ def main():
             "mitre": map_finding_to_mitre(item["type"])
         })
 
+    results["subdomains"] = get_subdomains(args.domain)
+    results["subdomains"]["mitre"] = techniques.get("subdomain_enum", "Unknown")
     # Output JSON to file or stdout
     output_data = json.dumps(results, indent=4)
     if args.output:

@@ -8,5 +8,12 @@ MITRE_MAP = {
     "whois_domain": "T1584 - Acquire Infrastructure"
 }
 
+techniques = {
+    "dns_lookup": "T1590",
+    "whois_lookup": "T1596",
+    "subdomain_enum": "T1590.002"
+}
+
+
 def map_finding_to_mitre(finding_type: str) -> str:
     return MITRE_MAP.get(finding_type, "Unknown")

@@ -11,7 +11,8 @@ MITRE_MAP = {
 techniques = {
     "dns_lookup": "T1590",
     "whois_lookup": "T1596",
-    "subdomain_enum": "T1590.002"
+    "subdomain_enum": "T1590.002",
+    "SSL_certificate_analysis": "T1590.003"
 }
 
 

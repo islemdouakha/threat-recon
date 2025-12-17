@@ -8,6 +8,7 @@ from recon.whois_lookup import whois_lookup
 from mitre.mapping import map_finding_to_mitre
 from mitre.mapping import techniques
 from recon import get_subdomains
+from recon.ssl_cert import get_ssl_info
 
 
 def validate_domain(domain: str) -> bool:
@@ -61,6 +62,9 @@ def main():
             "mitre": map_finding_to_mitre(item["type"])
         })
 
+    ssl_info = get_ssl_info(args.domain)
+    results["ssl_certificate"] = ssl_info
+    results["ssl_certificate"]["mitre"] = techniques.get("SSL_certificate_analysis", "Unknown")
     results["subdomains"] = get_subdomains(args.domain)
     results["subdomains"]["mitre"] = techniques.get("subdomain_enum", "Unknown")
     # Output JSON to file or stdout

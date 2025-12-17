@@ -12,7 +12,8 @@ techniques = {
     "dns_lookup": "T1590",
     "whois_lookup": "T1596",
     "subdomain_enum": "T1590.002",
-    "SSL_certificate_analysis": "T1590.003"
+    "SSL_certificate_analysis": "T1590.003",
+    "HTTP_technology_fingerprinting": "T1590.004"
 }
 
 

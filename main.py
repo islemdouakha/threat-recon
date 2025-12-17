@@ -9,6 +9,7 @@ from mitre.mapping import map_finding_to_mitre
 from mitre.mapping import techniques
 from recon import get_subdomains
 from recon.ssl_cert import get_ssl_info
+from recon.http_tech import fingerprint_http
 
 
 def validate_domain(domain: str) -> bool:
@@ -65,6 +66,10 @@ def main():
     ssl_info = get_ssl_info(args.domain)
     results["ssl_certificate"] = ssl_info
     results["ssl_certificate"]["mitre"] = techniques.get("SSL_certificate_analysis", "Unknown")
+    
+    results["http_tech"] = fingerprint_http(args.domain)
+    results["http_tech"]["mitre"] = techniques.get("HTTP_technology_fingerprinting", "Unknown")
+    
     results["subdomains"] = get_subdomains(args.domain)
     results["subdomains"]["mitre"] = techniques.get("subdomain_enum", "Unknown")
     # Output JSON to file or stdout
